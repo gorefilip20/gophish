@@ -38,7 +38,7 @@ func (d *RestrictedDialer) SetAllowedHosts(allowed []string) error {
 		// undoubtedly cause issues. If it works, then just append the
 		// appropriate subnet mask, then parse as CIDR
 		if singleIP := net.ParseIP(ipRange); singleIP != nil {
-			if singleIP.To4() != nil {
+			if singleIP.To4 () != nil {
 				ipRange += "/32"
 			} else {
 				ipRange += "/128"
@@ -48,7 +48,7 @@ func (d *RestrictedDialer) SetAllowedHosts(allowed []string) error {
 		if err != nil {
 			return fmt.Errorf("provided ip range is not valid CIDR notation: %v", err)
 		}
-		d.allowedHosts = append(d.allowedHosts, parsed)
+		d.allowedHosts = append (d.allowedHosts, parsed)
 	}
 	return nil
 }
