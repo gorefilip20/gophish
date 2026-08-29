@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* The Heritage Edit — dark tactical luxury mapped to HSL tokens */
+    --background: 96 14% 13%;        /* #1E241C */
+    --foreground: 74 12% 95%;        /* #F4F5F0 */
+
+    --card: 96 14% 18%;              /* #2C3528 */
+    --card-foreground: 74 12% 95%;
+
+    --popover: 96 14% 16%;
+    --popover-foreground: 74 12% 95%;
+
+    --primary: 46 65% 52%;           /* #D4AF37 muted gold */
+    --primary-foreground: 96 20% 12%;
+
+    --secondary: 96 17% 31%;         /* #4A5D43 slate green */
+    --secondary-foreground: 74 12% 95%;
+
+    --muted: 96 12% 22%;
+    --muted-foreground: 74 8% 68%;
+
+    --accent: 96 17% 31%;            /* slate green */
+    --accent-foreground: 74 12% 95%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 74 12% 95%;
+
+    --border: 46 30% 30%;            /* gold-tinted border */
+    --input: 96 12% 24%;
+    --ring: 46 65% 52%;
+
+    --radius: 0.65rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-heritage-bg text-heritage-paper antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  /* Subtle tactical gradient wash on the page background */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(212, 175, 55, 0.08), transparent 60%),
+      radial-gradient(900px 500px at 0% 100%, rgba(74, 93, 67, 0.18), transparent 55%);
+    pointer-events: none;
+  }
+}
+
+@layer components {
+  .heritage-card {
+    @apply rounded-xl border border-heritage-gold/25 bg-heritage-surface/80 backdrop-blur-sm;
+  }
+  .gold-border {
+    @apply border border-heritage-gold/40;
+  }
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-heritage-gold via-[#e8cf74] to-heritage-gold bg-clip-text text-transparent;
+  }
+}
+
+/* Custom scrollbar for a premium feel */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #1e241c;
+}
+::-webkit-scrollbar-thumb {
+  background: #4a5d43;
+  border-radius: 8px;
+  border: 2px solid #1e241c;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
