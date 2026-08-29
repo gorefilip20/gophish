@@ -9,10 +9,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { BRAND } from "@/lib/constants";
 
-// Load the pdf.js worker from a version-matched CDN (react-pdf's documented
-// approach for bundlers). Keeps the worker out of the app bundle and always
-// matches the installed pdfjs-dist version.
-pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+// Load the pdf.js worker from the app's own origin. The worker is copied into
+// /public by scripts/copy-pdf-worker.mjs (runs on `postinstall`), so there is
+// no external CDN dependency at runtime.
+pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
 const FILE = `/${BRAND.whitepaperFile}`;
 

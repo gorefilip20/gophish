@@ -4,6 +4,7 @@
   "private": true,
   "description": "RealApex ($APEX) 3-Page Presale Ecosystem & Admin Control Panel",
   "scripts": {
+    "postinstall": "node scripts/copy-pdf-worker.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
