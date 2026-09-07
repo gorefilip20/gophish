@@ -1,40 +1,76 @@
-export interface Product {
+export interface AIModel {
   id: string;
   name: string;
+  provider: string;
+  type: 'image' | 'video';
   description: string;
-  longDescription: string;
-  price: number;
-  originalPrice?: number;
-  images: string[];
-  category: string;
-  tags: string[];
-  rating: number;
-  reviewCount: number;
-  variants: {
-    colors?: { name: string; value: string }[];
-    sizes?: string[];
-  };
-  inStock: boolean;
-  featured: boolean;
-  bestSeller: boolean;
-  reviews: Review[];
+  strengths: string[];
+  speed: 'fast' | 'medium' | 'slow';
+  quality: 'standard' | 'high' | 'ultra';
+  maxResolution: string;
+  icon: string;
 }
 
-export interface Review {
+export interface AspectRatio {
+  label: string;
+  value: string;
+  width: number;
+  height: number;
+}
+
+export interface GenerationSettings {
+  prompt: string;
+  negativePrompt: string;
+  model: string;
+  aspectRatio: string;
+  steps: number;
+  cfgScale: number;
+  seed: number | null;
+  samples: number;
+  persona: string | null;
+  enhancePrompt: boolean;
+  faceLock: boolean;
+}
+
+export interface GeneratedImage {
   id: string;
-  author: string;
-  rating: number;
-  date: string;
-  title: string;
-  content: string;
-  verified: boolean;
+  prompt: string;
+  negativePrompt: string;
+  model: string;
+  aspectRatio: string;
+  imageUrl: string;
+  thumbnailUrl: string;
+  width: number;
+  height: number;
+  seed: number;
+  steps: number;
+  cfgScale: number;
+  persona: string | null;
+  createdAt: string;
+  favorite: boolean;
+  status: 'generating' | 'complete' | 'failed' | 'upscaled';
+  type: 'image' | 'video';
 }
 
-export interface CartItem {
-  product: Product;
-  quantity: number;
-  selectedColor?: string;
-  selectedSize?: string;
+export interface Persona {
+  id: string;
+  name: string;
+  avatar: string;
+  description: string;
+  styleTags: string[];
+  faceLockEnabled: boolean;
+  faceReferenceUrl: string | null;
+  basePrompt: string;
+  negativePrompt: string;
+  preferredModel: string;
+  gender: string;
+  age: string;
+  ethnicity: string;
+  bodyType: string;
+  hairStyle: string;
+  hairColor: string;
+  createdAt: string;
+  generationCount: number;
 }
 
 export interface User {
@@ -43,15 +79,10 @@ export interface User {
   email: string;
   avatar?: string;
   joinedDate: string;
-  orders: Order[];
+  credits: number;
+  plan: 'free' | 'pro' | 'enterprise';
 }
 
-export interface Order {
-  id: string;
-  date: string;
-  items: CartItem[];
-  total: number;
-  status: 'processing' | 'shipped' | 'delivered';
-}
-
-export type SortOption = 'featured' | 'price-asc' | 'price-desc' | 'rating' | 'newest';
+export type ViewMode = 'grid' | 'list';
+export type GalleryFilter = 'all' | 'favorites' | 'images' | 'videos' | 'upscaled';
+export type GallerySort = 'newest' | 'oldest' | 'prompt';

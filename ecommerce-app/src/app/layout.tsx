@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import CartDrawer from "@/components/CartDrawer";
+import { StudioProvider } from "@/context/StudioContext";
+import { PersonaProvider } from "@/context/PersonaContext";
+import Sidebar from "@/components/Sidebar";
+import TopBar from "@/components/TopBar";
 
 export const metadata: Metadata = {
-  title: "LUMIERE | Premium Beauty & Lifestyle",
-  description: "Discover luxury skincare, fragrances, and wellness products crafted for the modern connoisseur.",
+  title: "AI Studio | Influencer Image Generation",
+  description: "AI-powered image and video generation studio for creating influencer content with persona consistency.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -18,18 +18,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-full flex flex-col bg-[#0a0a0a] text-surface-100">
+      <body className="min-h-full bg-surface-950 text-surface-100">
         <AuthProvider>
-          <CartProvider>
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <CartDrawer />
-          </CartProvider>
+          <StudioProvider>
+            <PersonaProvider>
+              <div className="flex min-h-screen">
+                <Sidebar />
+                <div className="flex-1 ml-16 lg:ml-56 flex flex-col min-h-screen">
+                  <TopBar />
+                  <main className="flex-1">{children}</main>
+                </div>
+              </div>
+            </PersonaProvider>
+          </StudioProvider>
         </AuthProvider>
       </body>
     </html>
